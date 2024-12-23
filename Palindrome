@@ -1,0 +1,14 @@
+def isPalindrome(x: int) -> bool: #First Approach
+        for i in range(len(str(x))):
+            if(str(x)[i] != str(x)[-1-i]):
+                return False       
+        return True
+# Reverse the string in one shot and compare with the original string
+def isPalindrome(x: int) -> bool: #Second Approach
+        return str(x) == str(x)[::-1]
+
+print(isPalindrome(121))
+print(isPalindrome(-121))
+print(isPalindrome(10))
+print(isPalindrome(-101))
+print(isPalindrome(0))
