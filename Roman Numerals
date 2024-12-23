@@ -1,0 +1,14 @@
+def romanToInt(self, s: str) -> int: #First Approach
+        sum = 0
+        d = {'I':1,'V':5, 'X':10, 'L':50, 'C':100,'D':500,'M':1000}
+        for x in range(len(s)-1):
+            if d[s[x]]<d[s[x+1]]:
+                sum-= d[s[x]]
+            else:    
+                sum+= d[s[x]]
+
+        return sum+d[s[-1]]
+
+print(romanToInt("III"))
+print(romanToInt("IV"))
+print(romanToInt("IX"))

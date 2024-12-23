@@ -1,0 +1,6 @@
+from collections import Counter
+def judgeCircle(moves):
+    count = Counter(moves)
+    return count['U'] == count['D'] and count['L'] == count['R']
+
+print(judgeCircle("UD"))
