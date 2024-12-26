@@ -1,0 +1,22 @@
+def isRobotBounded(instructions):
+    Position = [0,0]
+    Direction= 0
+    for i in instructions:
+        if i == "G":
+            if Direction == 0:
+                Position[1] += 1
+            elif Direction == 1:
+                Position[0] += 1
+            elif Direction == 2:
+                Position[1] -= 1
+            elif Direction == 3:
+                Position[0] -= 1
+        elif i == "L":
+            Direction = (Direction + 3) % 4
+        elif i == "R":
+            Direction = (Direction + 1) % 4
+    return Position == [0,0] or Direction != 0
+
+print(isRobotBounded("GGLLGG"))
+print(isRobotBounded("GG"))
+print(isRobotBounded("GL"))
