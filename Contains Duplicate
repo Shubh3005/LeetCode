@@ -1,0 +1,7 @@
+from collections import Counter
+def hasDuplicate(nums):
+    count = Counter(nums)
+    for key in count:
+        return count[key] > 1
+    
+print(hasDuplicate([1,2,3,1]))
