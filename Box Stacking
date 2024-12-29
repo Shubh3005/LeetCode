@@ -1,0 +1,21 @@
+def boxStacking(b):
+    def gcd(a, b):
+        while b: a, b = b, a % b
+        return a
+    def lcm(a, b):
+        return a * b / gcd(a, b)
+    def add(a, b):
+        lcm_ab = lcm(a[1], b[1])
+        return [a[0] * (lcm_ab / a[1]) + b[0] * (lcm_ab / b[1]), lcm_ab]
+    def reduce(a):
+        if a[0] == 0: return [0, 1]
+        gcd_ab = gcd(a[0], a[1])
+        return [a[0] / gcd_ab, a[1] / gcd_ab]
+    res = [0, 1]
+    for i in b:
+        res = add(res, [i[0] * i[1], i[2]])
+        res = add(res, [i[1] * i[2], i[0]])
+        res = add(res, [i[2] * i[0], i[1]])
+    return reduce(res)
+
+print(boxStacking([[1,1,1],[2,2,2],[3,3,3]])) # [6, 1]
