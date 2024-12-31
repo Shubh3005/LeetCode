@@ -1,0 +1,6 @@
+def repeatedCharacter(s):
+    # Write your code here
+    for i in range(len(s)):
+        if s[i] in s[i+1:]:
+            return s[i]
+    return -1

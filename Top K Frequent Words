@@ -1,0 +1,11 @@
+from collections import Counter
+def topKFrequent(words,k):
+    count = Counter(words)
+    candidates = list(count.keys())
+    while len(candidates) > k:
+        candidates.sort(key = lambda w: (-count[w], w))
+        candidates.pop()
+    return candidates
+
+print(topKFrequent(["i", "love", "leetcode", "i", "love", "coding"], 2)) 
+print(topKFrequent(["the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"], 4))
