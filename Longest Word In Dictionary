@@ -1,0 +1,13 @@
+def longestWord(words):
+    words = sorted(words)
+    d={}
+    for word in words:
+        if len(word)==1 or word[:-1] in d:
+            d[word]=True
+    if not d:
+        return ""
+    return max(d, key=len)
+
+
+print(longestWord(["w","wo","wor","worl","world"])) # "world"
+print(longestWord(["a","banana","app","appl","ap","apply","apple", "b"])) # "apple"

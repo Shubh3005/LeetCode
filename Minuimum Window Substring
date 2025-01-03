@@ -1,0 +1,40 @@
+def minWindow(s,t):
+    if s==t:
+        return s
+    if len(t)==1:
+        if t in s:
+            return t
+        else:
+            return ""
+    start=0
+    end=0
+    min_len=99999
+    min_start=0
+    counter=len(t)
+    d={}
+    for i in t:
+        if i in d:
+            d[i]+=1
+        else:
+            d[i]=1
+    while end<len(s):
+        if s[end] in d:
+            if d[s[end]]>0:
+                counter-=1
+            d[s[end]]-=1
+        end+=1
+        while counter==0:
+            if end-start<99999:
+                min_len=end-start
+                min_start=start
+            if s[start] in d:
+                d[s[start]]+=1
+                if d[s[start]]>0:
+                    counter+=1
+            start+=1
+    if min_len==99999:
+        return ""
+    return s[min_start:min_start+min_len]
+
+
+print(minWindow("ADOBECODEBANC","ABC")) #BANC

@@ -1,0 +1,10 @@
+def plusOne(digits):
+    if not digits:
+        return [1]
+    if digits[-1] != 9:
+        digits[-1] += 1
+        return digits
+    return plusOne(digits[:-1]) + [0]
+print(plusOne([1,2,3])) # [1,2,4]
+print(plusOne([4,3,2,1])) # [4,3,2,2]
+print(plusOne([9])) # [1,0]
