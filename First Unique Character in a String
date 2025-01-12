@@ -16,3 +16,4 @@ def firstUniqChar(s): #Approach 2
         return -1
 def firstUniqChar(s): #Approach 3
      return None
+

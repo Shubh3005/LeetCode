@@ -1,0 +1,30 @@
+def minAreaRect(points):
+    x_map = {}
+    for x, y in points:
+        if x not in x_map:
+            x_map[x] = []
+        x_map[x].append(y)
+    
+    for x in x_map:
+        x_map[x].sort()
+    
+    last_x = {}
+    min_area = 999999999
+
+    for x in sorted(x_map.keys()):
+        y_list = x_map[x]
+        for i in range(len(y_list)):
+            for j in range(i + 1, len(y_list)):
+                y1, y2 = y_list[i], y_list[j]
+                if (y1, y2) in last_x:
+                    prev_x = last_x[(y1, y2)]
+                    area = (x - prev_x) * (y2 - y1)
+                    min_area = min(min_area, area)
+                last_x[(y1, y2)] = x
+    if min_area == 999999999:
+        return 0
+    else:
+        return min_area
+
+print(minAreaRect([[1,1],[1,3],[3,1],[3,3],[2,2]]))
+print(minAreaRect([[1,1],[1,3],[3,1],[3,3],[4,1],[4,3]]))

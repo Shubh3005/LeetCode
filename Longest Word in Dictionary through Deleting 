@@ -1,0 +1,31 @@
+from collections import defaultdict
+
+def findLongestWord(s,dictionary) -> str:
+    valid = []
+    Ivalid = True
+    for i in dictionary:
+        for j in i: 
+            if j not in s:
+                Ivalid = False
+                break
+        if Ivalid == True:
+            valid.append(i)
+
+def findLongestWord(s,dictionary) -> str:
+    valid = []
+    Ivalid = True
+    for i in dictionary:
+        for j in i: 
+            if j not in s:
+                Ivalid = False
+                break
+        if Ivalid == True:
+            valid.append(i)
+    if len(valid) == 0:
+        return ""
+    else:
+        valid.sort()
+        return valid[-1]
+    
+    
+print(findLongestWord("abpcplea",["ale","apple","monkey","plea"]) == "apple")
