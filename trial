@@ -1,0 +1,89 @@
+class LRUCache:
+    def __init__(self, capacity: int):
+        ...
+        self.capacity = capacity
+        self.cache = defaultdict(list)
+        self.mostrecentlyused = 0
+
+    def get(self, key: int) -> int:
+        ...
+        if key in self.cache:
+            self.cache[key][1] = self.mostrecentlyused + 1
+            self.mostrecentlyused += 1
+            return self.cache[key][0]
+        return -1
+
+    def put(self, key: int, value: int) -> None:
+        ...
+        if key in self.cache:
+            self.cache[key][1] = self.mostrecentlyused + 1
+            self.cache[key][0] = value
+        elif (len(self.cache) < self.capacity):
+            self.cache[key].append(value)
+            self.cache[key].append(self.mostrecentlyused + 1)
+        else:
+            minCounter = float('inf')
+            leastRecentlyUsed = 0
+            for key2, val in self.cache.items():
+                if val[1] < minCounter:
+                    minCounter = val[1]
+                    leastRecentlyUsed = key2
+            del self.cache[leastRecentlyUsed] 
+            self.cache[key].append(value)
+            self.cache[key].append(self.mostrecentlyused + 1)
+        self.mostrecentlyused += 1
+
+
+
+
+
+
+
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)
+
+
+class Solution:
+    
+    def daysBetweenDates(self, date1: str, date2: str) -> int:
+        def f(date):
+            y, m, d = map(int, date.split('-'))
+            if m < 3:
+                m += 12
+                y -= 1
+            return 365 * y + y // 4 + y // 400 - y // 100 + d + (153 * m + 8) // 5
+        
+        return abs(f(date1) - f(date2))
+
+
+def maxProfit(prices):
+    min = prices[0]
+    max= 0
+    for i in range(1,len(prices)):
+        #Min Value
+        if prices[i] < min:
+            min = prices[i]
+        else:
+            #Max Profit
+            if max < (prices[i]-min):
+                max = prices[i]-min
+    return max
+
+class Solution:
+    def maxProfit(self, k: int, prices: List[int]) -> int:
+        n = len(prices)
+        after = [[0 for _ in range(k+1)] for _ in range(2)]
+        curr = [[0 for _ in range(k+1)] for _ in range(2)]
+
+        for i in range(n-1, -1, -1):
+            for buy in range(2):
+                for t in range(1,k+1):
+                    if buy == 1:
+                        curr[buy][t] = max(-prices[i] + after[0][t],after[1][t])
+                    else:
+                        curr[buy][t] = max(prices[i] + after[1][t-1],after[0][t])
+            after = curr
+        
+        return after[1][k]
